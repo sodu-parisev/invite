@@ -12,7 +12,8 @@ class InviteController extends Controller
 {
     public function submit(InviteSubmitRequest $request)
     {
-        $attributes = $request->all();
+        $attributes = $request->validated();
+        dd($attributes);
         $attributes['token'] = Str::random(20);
         if ($request->form_of_attendance === \App\Enums\FormOfAttendance::Offline->value) {
             $attributes['passport'] = $request->file('passport')->store('private/passports');

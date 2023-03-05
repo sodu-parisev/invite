@@ -4,8 +4,8 @@ namespace App\Enums;
 
 enum FormOfAttendance: string
 {
-    case Online = 'pending';
-    case Offline = 'failed';
+    case Online = 'online';
+    case Offline = 'offline';
 
     public function label(): string {
         return static::getLabel($this);
