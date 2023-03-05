@@ -51,13 +51,11 @@
                             />
 
                             <x-bootstrap-file-input
-                                    required
                                     :name="'passport'"
                                     :field_label=" __('Passport') "
                             />
 
                             <x-bootstrap-file-input
-                                    required
                                     :name="'diploma'"
                                     :field_label=" __('Diploma') "
                             />

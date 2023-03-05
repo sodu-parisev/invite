@@ -12,9 +12,13 @@ class InviteController extends Controller
 {
     public function submit(InviteSubmitRequest $request)
     {
-        $invite = (new Invite)->fill($request->all());
-        $invite->token = Str::random(20);
-        dd($request->file('passport'));
+        $attributes = $request->all();
+        $attributes['token'] = Str::random(20);
+        if ($request->form_of_attendance === \App\Enums\FormOfAttendance::Offline->value) {
+            $attributes['passport'] = $request->file('passport')->store('private/passports');
+            $attributes['diploma'] = $request->file('diploma')->store('private/diplomas');
+        }
+        $invite = (new Invite)->fill($attributes)->save();
     }
 
     public function confirmation()
