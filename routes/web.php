@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InviteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::post('invite', [InviteController::class, 'submit'])->name('invite-submit');
-Route::get('confirm', [InviteController::class, 'confirmPage'])->name('invite-confirm-page');
-Route::post('confirm-payment', [InviteController::class, 'confirmPayment'])->name('invite-confirm-payment');
+Route::get('invite/confirm', [InviteController::class, 'confirmPage'])->name('invite-confirm-page');
+Route::post('invite/payment/5698b6eab6a', [PaymentController::class, 'clickWebhook'])->name('invite-payment-webhook');
 
 require __DIR__.'/auth.php';
