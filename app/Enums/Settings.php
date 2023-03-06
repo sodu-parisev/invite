@@ -18,4 +18,20 @@ enum Settings: string
             self::ZOOM_URL => '',
         };
     }
+
+    public static function getDbSettings()
+    {
+        return [
+            self::PAYMENT_AMOUNT,
+            self::ZOOM_URL
+        ];
+    }
+
+    public function getLabel()
+    {
+        return match ($this) {
+            self::PAYMENT_AMOUNT => 'Payment amount',
+            self::ZOOM_URL => 'Zoom URL',
+        };
+    }
 }

@@ -31,8 +31,14 @@ class DashboardController extends Controller
         return view('settings', ['settings' => $settings]);
     }
 
-    public function settingsSubmit()
+    public function settingsSubmit(Request $request)
     {
-
+        foreach (Settings::getDbSettings() as $setting) {
+            DBSettings::updateOrCreate(
+              ['name' => $setting->value],
+              ['value' => $request->get($setting->value)]
+            );
+        }
+        return redirect(route('dashboard.settings-page'));
     }
 }
