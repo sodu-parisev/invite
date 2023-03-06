@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Settings as DBSettings;
 use Illuminate\Database\Eloquent\Builder;
+use App\Http\Requests\SaveSettingsRequest;
 
 class DashboardController extends Controller
 {
@@ -35,7 +36,7 @@ class DashboardController extends Controller
         return view('settings', ['settings' => $settings]);
     }
 
-    public function settingsSubmit(Request $request)
+    public function settingsSubmit(SaveSettingsRequest $request)
     {
         foreach (Settings::getDbSettings() as $setting) {
             DBSettings::updateOrCreate(
