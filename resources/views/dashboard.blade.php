@@ -1,4 +1,22 @@
 <x-app-layout>
+    <form action="" class="row g-3">
+        <div class="col-sm-2">
+            <input
+                    type="text"
+                    class="form-control"
+                    name="full_name"
+                    placeholder="{{ __('Search by name') }}"
+                    value="{{ request()->query('full_name') }}"
+            >
+        </div>
+        <div class="col-sm-1">
+            <button type="submit" class="btn btn-primary mb-3">{{ __('Search') }}</button>
+        </div>
+        <div class="col-sm-1">
+            <a class="btn btn-success" href="{{ route('dashboard') }}">{{ __('Reset') }}</a>
+        </div>
+    </form>
+
     <table class="table">
         <thead>
             <tr>
@@ -40,11 +58,11 @@
                     </td>
 
                     <td>
-                        {{ $invite->form_of_attendance }}
+                        {{ __(\App\Enums\FormOfAttendance::from($invite->form_of_attendance)->name) }}
                     </td>
 
                     <td>
-
+                        {{ __(\App\Enums\PaymentStatus::from($invite->payment_status)->name) }}
                     </td>
 
                     <td>

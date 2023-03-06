@@ -16,7 +16,7 @@ class InviteController extends Controller
         $attributes = $request->validated();
         $attributes['token'] = Str::random(10);
         if ($request->form_of_attendance === \App\Enums\FormOfAttendance::Offline->value) {
-            $attributes['passport'] = $request->file('passport')->store(Settings::PASSPORT_STORAGE_PATH);
+            $attributes['passport'] = $request->file('passport')->store(Settings::PASSPORT_STORAGE_PATH->value);
             $attributes['diploma'] = $request->file('diploma')->store(Settings::DIPLOMA_STORAGE_PATH->value);
         }
         $invite = (new Invite)->fill($attributes)->save();

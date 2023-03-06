@@ -9,12 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Settings as DBSettings;
+use Illuminate\Database\Eloquent\Builder;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $invites = Invite::query()
+          ->when($request->query() !== [], function (Builder $query) use ($request) {
+              $query->where('full_name', 'like', '%' . $request->query('full_name') . '%');
+          })
           ->orderBy('created_at', 'desc')
           ->paginate(15);
         return view('dashboard', ['invites' => $invites]);
