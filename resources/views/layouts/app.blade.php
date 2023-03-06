@@ -15,7 +15,10 @@
         @vite(['resources/js/app.js'])
     </head>
     <body>
-        <div class="container pt-5">
+        <div class="container-fluid pt-5">
+            <h1>
+                {{ __('Dashboard') }}
+            </h1>
             <div class="row">
                 <div class="col-sm-3">
                     @include('layouts.navigation')

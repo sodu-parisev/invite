@@ -9,6 +9,7 @@
                 <th>{{ __('Phone number') }}</th>
                 <th>{{ __('Email') }}</th>
                 <th>{{ __('Form of attendance') }}</th>
+                <th>{{ __('Payment Status') }}</th>
                 <th>{{ __('Passport') }}</th>
                 <th>{{ __('Diploma') }}</th>
             </tr>
@@ -43,11 +44,29 @@
                     </td>
 
                     <td>
-                        {{ $invite->passport }}
+
                     </td>
 
                     <td>
-                        {{ $invite->diploma }}
+                        @if(!empty($invite->passport))
+                        <a
+                                href="{{ route('dashboard.download-file', ['filename' => $invite->passport]) }}"
+                                class="btn btn-success"
+                        >
+                            {{ __('Download') }}
+                        </a>
+                        @endif
+                    </td>
+
+                    <td>
+                        @if(!empty($invite->diploma))
+                        <a
+                                href="{{ route('dashboard.download-file', ['filename' => $invite->diploma]) }}"
+                                class="btn btn-success"
+                        >
+                            {{ __('Download') }}
+                        </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

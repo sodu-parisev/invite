@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Settings;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\InviteSubmitRequest;
 use App\Models\Invite;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Settings as DBSettings;
 
 class DashboardController extends Controller
 {
@@ -16,5 +18,21 @@ class DashboardController extends Controller
           ->orderBy('created_at', 'desc')
           ->paginate(15);
         return view('dashboard', ['invites' => $invites]);
+    }
+
+    public function downloadFile(Request $request)
+    {
+        return Response::download(Storage::path($request->filename), basename($request->filename));
+    }
+
+    public function settingsPage()
+    {
+        $settings = DBSettings::all();
+        return view('settings', ['settings' => $settings]);
+    }
+
+    public function settingsSubmit()
+    {
+
     }
 }
