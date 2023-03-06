@@ -28,5 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::post('invite', [InviteController::class, 'submit'])->name('invite-submit');
+Route::get('confirm', [InviteController::class, 'confirmPage'])->name('invite-confirm-page');
+Route::post('confirm-payment', [InviteController::class, 'confirmPayment'])->name('invite-confirm-payment');
 
 require __DIR__.'/auth.php';
