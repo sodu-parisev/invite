@@ -64,7 +64,7 @@
                                 <div class="card mb-4 rounded-3 shadow-sm">
                                     <div class="card-body">
                                         <h3 class="card-title pricing-card-title">
-                                           {{ __('Attendance cost: ') }} {{ number_format(\App\Models\Settings::query()->where('name', \App\Enums\Settings::PAYMENT_AMOUNT->value)->value('value') ?? \App\Enums\Settings::PAYMENT_AMOUNT->defaultValue()) . ' ' . __('soum') }}
+                                           {{ __('Attendance cost:') }} {{ number_format(\App\Models\Settings::query()->where('name', \App\Enums\Settings::PAYMENT_AMOUNT->value)->value('value') ?? \App\Enums\Settings::PAYMENT_AMOUNT->defaultValue()) . ' ' . __('soum') }}
                                         </h3>
                                         <button class="btn btn-success">
                                             {{ __('Sign up and Pay') }}
