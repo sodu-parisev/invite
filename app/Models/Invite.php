@@ -9,8 +9,16 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Invite extends Model
 {
     use HasFactory;
-
     protected $guarded = [];
+
+    /**
+     * Get the route key for the model.
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'token';
+    }
 
     public function clickRequest(): HasOne
     {

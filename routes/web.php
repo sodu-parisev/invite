@@ -25,8 +25,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('invite/payment/prepare', [PaymentController::class, 'clickWebhookPrepare'])->name('invite-prepare-webhook');
-Route::post('invite/payment/complete', [PaymentController::class, 'clickWebhookComplete'])->name('invite-complete-webhook');
+Route::post('payment/prepare', [PaymentController::class, 'clickWebhookPrepare'])->name('invite-prepare-webhook');
+Route::post('payment/complete', [PaymentController::class, 'clickWebhookComplete'])->name('invite-complete-webhook');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -36,6 +36,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::post('invite', [InviteController::class, 'submit'])->name('invite-submit');
-Route::get('invite/confirm', [InviteController::class, 'confirmPage'])->name('invite-confirm-page');
+Route::get('confirm/{invite}', [InviteController::class, 'confirmPage'])->name('invite-confirm-page');
 
 require __DIR__.'/auth.php';

@@ -25,8 +25,8 @@ class InviteController extends Controller
         return redirect($paymentService->getPaymentUrl($invite));
     }
 
-    public function confirmPage()
+    public function confirmPage(Invite $invite)
     {
-        return view('invite-confirm');
+        return view('invite-confirm', ['invite' => $invite]);
     }
 }

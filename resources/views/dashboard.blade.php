@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form action="" class="row g-3">
+    <form action="" class="row g-3 mb-3">
         <div class="col-sm-2">
             <input
                     type="text"
@@ -9,11 +9,12 @@
                     value="{{ request()->query('full_name') }}"
             >
         </div>
-        <div class="col-sm-1">
-            <button type="submit" class="btn btn-primary mb-3">{{ __('Search') }}</button>
-        </div>
-        <div class="col-sm-1">
-            <a class="btn btn-success" href="{{ route('dashboard') }}">{{ __('Reset') }}</a>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
+
+            <a class="btn btn-success" href="{{ route('dashboard', ['show_only_paid' => 1]) }}">{{ __('Show only paid') }}</a>
+
+            <a class="btn btn-secondary" href="{{ route('dashboard') }}">{{ __('Reset') }}</a>
         </div>
     </form>
 

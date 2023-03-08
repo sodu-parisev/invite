@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentStatus;
 use App\Enums\Settings;
 use App\Http\Controllers\Controller;
 use App\Models\Invite;
@@ -17,11 +18,15 @@ class DashboardController extends Controller
     public function index(Request $request)
     {
         $invites = Invite::query()
-          ->when($request->query() !== [], function (Builder $query) use ($request) {
-              $query->where('full_name', 'like', '%' . $request->query('full_name') . '%');
-          })
-          ->orderBy('created_at', 'desc')
-          ->paginate(15);
+            ->when($request->query() !== [], function (Builder $query) use ($request) {
+                $query->where('full_name', 'like', '%' . $request->query('full_name') . '%');
+            })
+            ->when($request->query('show_only_paid'), function (Builder $query) {
+                $query->where('payment_status', '=', PaymentStatus::Completed->value);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(15)
+            ->withQueryString();
         return view('dashboard', ['invites' => $invites]);
     }
 
