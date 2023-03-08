@@ -35,6 +35,7 @@
                                     required
                                     :name="'phone_number'"
                                     :field_label=" __('Phone number') "
+                                    value="+998"
                             />
 
                             <x-bootstrap-input
@@ -78,4 +79,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+      var element = document.getElementById('phone_number');
+      var maskOptions = {
+        mask: '+{998} (00) 000-00-00'
+      };
+      var mask = IMask(element, maskOptions);
+    </script>
 </x-invite-layout>

@@ -62,7 +62,9 @@
                     </td>
 
                     <td>
-                        {{ __(\App\Enums\PaymentStatus::from($invite->payment_status)->name) }}
+                        <span style="color:{{ \App\Enums\PaymentStatus::from($invite->payment_status)->getColor() }}">
+                            {{ __(\App\Enums\PaymentStatus::from($invite->payment_status)->name) }}
+                        </span>
                     </td>
 
                     <td>

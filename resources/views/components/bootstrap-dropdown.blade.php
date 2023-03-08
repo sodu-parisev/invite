@@ -14,7 +14,7 @@ if ($errors->has($name)) {
     >{{ $field_label }}</label>
 
     <select {!! $attributes->merge(['class' => implode(' ', $classes)]) !!} name="{{ $name }}" id="{{ $name }}">
-        <option>{{ __('Choose an options') }}</option>
+        <option>{{ __('Choose an option') }}</option>
         @foreach($options as $key => $option)
             <option {!! old($name) == $key ? 'selected' : '' !!} value="{{ $key }}">{{ $option }}</option>
         @endforeach

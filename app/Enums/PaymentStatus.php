@@ -20,4 +20,13 @@ enum PaymentStatus: string
             self::Completed => __('Completed'),
         };
     }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::Pending => 'orange',
+            self::Failed => 'red',
+            self::Completed => 'green'
+        };
+    }
 }
