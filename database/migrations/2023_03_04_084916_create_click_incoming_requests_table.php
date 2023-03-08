@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('error_note');
             $table->timestamp('sign_time');
             $table->string('sign_string');
+            $table->string('type');
             $table->foreignId('invite_id')
               ->references('id')
               ->on('invites')
