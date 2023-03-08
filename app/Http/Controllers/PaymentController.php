@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\PaymentStatus;
 use App\Enums\Settings;
 use App\Models\Invite;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,15 +16,19 @@ class PaymentController extends Controller
 {
     public function clickWebhookPrepare(ClickUzWebhookRequest $request): JsonResponse
     {
+        $invite = Invite::where('token', $request->merchant_trans_id)->first();
         $request->merge(['type' => ClickUzRequestTypes::Prepare->value]);
-        $clickRequest = ClickIncomingRequest::create($request->all());
+        $clickRequest = $invite->clickRequest()->create($request->all());
+        $invite->update([
+            'payment_status' => PaymentStatus::Pending->value
+        ]);
 
         return response()->json([
             'click_trans_id' => $clickRequest->click_trans_id,
-            'merchant_trans_id' => $clickRequest->merchant_trans_id,
+            'merchant_trans_id' => $invite->id,
             'merchant_prepare_id' => $clickRequest->id,
             'error' => 0,
-            'error_note' => 'Success: Order exists'
+            'error_note' => ''
         ]);
     }
 
@@ -33,8 +38,8 @@ class PaymentController extends Controller
             ->where('token', $request->merchant_trans_id)
             ->whereHas('clickRequest', function (Builder $query) {
                 $query->where([
-                    'action' => 1,
-                    'type' => ClickUzRequestTypes::Complete->value
+                    'type' => ClickUzRequestTypes::Complete->value,
+                    'payment_status' => PaymentStatus::Completed->value
                 ]);
             })
             ->first();
@@ -49,17 +54,24 @@ class PaymentController extends Controller
             ]);
         }
 
-        $clickRequest = ClickIncomingRequest::create(
-            [
-                'merchant_trans_id' => $request->merchant_trans_id
-            ],
-            $request->all()
-        );
+        $invite = Invite::where('token', $request->merchant_trans_id)->first();
+        $request->merge(['type' => ClickUzRequestTypes::Complete->value]);
+        $clickRequest = $invite->clickRequest()->create($request->all());
+        if ($clickRequest->error != 0) {
+            $invite->update([
+                'payment_status' => PaymentStatus::Failed->value
+            ]);
+        }
+        else {
+            $invite->update([
+                'payment_status' => PaymentStatus::Completed->value
+            ]);
+        }
 
         return response()->json([
             'click_trans_id' => $clickRequest->click_trans_id,
             'merchant_trans_id' => $clickRequest->merchant_trans_id,
-            'merchant_prepare_id' => $clickRequest->id,
+            'merchant_confirm_id' => $clickRequest->id,
             'error' => 0,
             'error_note' => ''
         ]);

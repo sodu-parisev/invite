@@ -19,7 +19,8 @@ return new class extends Migration
             $table->float('amount');
             $table->smallInteger('action');
             $table->integer('error');
-            $table->string('error_note');
+            $table->string('error_note')
+                ->nullable();
             $table->timestamp('sign_time');
             $table->string('sign_string');
             $table->string('type');

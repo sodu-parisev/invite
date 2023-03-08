@@ -26,16 +26,9 @@ class ClickUzWebhookRequest extends FormRequest
             'amount' => 'numeric',
             'action' => 'integer',
             'error' => 'integer',
-            'error_note' => 'string',
+            'error_note' => 'string|nullable',
             'sign_time' => 'string',
             'sign_string' => 'string',
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-    {
-        return response()->json([
-            'something' => 'sadasd'
-        ]);
     }
 }
