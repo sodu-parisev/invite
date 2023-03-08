@@ -36,11 +36,15 @@
                                 </tr>
                                 @if(
                                     PaymentStatus::Completed === PaymentStatus::from($invite->payment_status) &&
-                                    FormOfAttendance::Offline === FormOfAttendance::from($invite->form_of_attendance)
+                                    FormOfAttendance::Online === FormOfAttendance::from($invite->form_of_attendance)
                                 )
                                     <tr>
                                         <th>{{ __('Zoom link') }}:</th>
-                                        <td>{{ \App\Models\Settings::where('name', \App\Enums\Settings::ZOOM_URL->value)->value('value') }}</td>
+                                        <td>
+                                            <a href="{{ \App\Models\Settings::where('name', \App\Enums\Settings::ZOOM_URL->value)->value('value') }}">
+                                                {{ __('Join the meeting') }}
+                                            </a>
+                                        </td>
                                     </tr>
                                 @endif
                             </tbody>

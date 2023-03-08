@@ -25,5 +25,8 @@
   "Pending": "Ожидвет",
   "Download": "Скачать",
   "Participant": "Участник",
-  "Date of submit": "Дата регистрации"
+  "Date of submit": "Дата регистрации",
+  "Show only paid": "Показать только оплаченных",
+  "Join the meeting": "Подключится к конференции",
+  "Zoom link": "Zoom ссылка"
 }

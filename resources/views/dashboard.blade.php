@@ -9,7 +9,7 @@
                     value="{{ request()->query('full_name') }}"
             >
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-8">
             <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
 
             <a class="btn btn-success" href="{{ route('dashboard', ['show_only_paid' => 1]) }}">{{ __('Show only paid') }}</a>
@@ -38,7 +38,9 @@
             @foreach($invites as $invite)
                 <tr>
                     <td>
-                        {{ $invite->id }}
+                        <a href="{{ route('invite-confirm-page', ['invite' => $invite->token]) }}">
+                            #{{ $invite->id }}
+                        </a>
                     </td>
                     <td>
                         {{ $invite->created_at }}
