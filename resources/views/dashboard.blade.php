@@ -12,8 +12,6 @@
         <div class="col-sm-8">
             <button type="submit" class="btn btn-primary">{{ __('Search') }}</button>
 
-            <a class="btn btn-success" href="{{ route('dashboard', ['show_only_paid' => 1]) }}">{{ __('Show only paid') }}</a>
-
             <a class="btn btn-secondary" href="{{ route('dashboard') }}">{{ __('Reset') }}</a>
         </div>
     </form>
@@ -28,7 +26,6 @@
                 <th>{{ __('Phone number') }}</th>
                 <th>{{ __('Email') }}</th>
                 <th>{{ __('Form of attendance') }}</th>
-                <th>{{ __('Payment Status') }}</th>
                 <th>{{ __('Passport') }}</th>
                 <th>{{ __('Diploma') }}</th>
             </tr>
@@ -62,12 +59,6 @@
 
                     <td>
                         {{ __(\App\Enums\FormOfAttendance::from($invite->form_of_attendance)->name) }}
-                    </td>
-
-                    <td>
-                        <span style="color:{{ \App\Enums\PaymentStatus::from($invite->payment_status)->getColor() }}">
-                            {{ __(\App\Enums\PaymentStatus::from($invite->payment_status)->name) }}
-                        </span>
                     </td>
 
                     <td>
