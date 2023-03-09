@@ -22,7 +22,8 @@ class InviteController extends Controller
         }
         $invite = new Invite;
         $invite->fill($attributes)->save();
-        return redirect($paymentService->getPaymentUrl($invite));
+        // return redirect($paymentService->getPaymentUrl($invite));
+        return redirect(route('invite-confirm-page', ['invite' => $invite]));
     }
 
     public function confirmPage(Invite $invite)

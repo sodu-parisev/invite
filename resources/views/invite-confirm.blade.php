@@ -26,16 +26,7 @@
                                     <th>{{ __('Form of attendance') }}</th>
                                     <td>{{ __(FormOfAttendance::from($invite->form_of_attendance)->name) }}</td>
                                 </tr>
-                                <tr>
-                                    <th>{{ __('Payment Status') }}</th>
-                                    <td>
-                                        <strong style="color:{{ PaymentStatus::from($invite->payment_status)->getColor() }}">
-                                            {{ __(PaymentStatus::from($invite->payment_status)->name) }}
-                                        </strong>
-                                    </td>
-                                </tr>
                                 @if(
-                                    PaymentStatus::Completed === PaymentStatus::from($invite->payment_status) &&
                                     FormOfAttendance::Online === FormOfAttendance::from($invite->form_of_attendance)
                                 )
                                     <tr>
